@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../services/api_service.dart';
 import '../location_picker.dart';
+import '../tracking/Tracking_entry_screen.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({super.key});
@@ -31,10 +32,13 @@ class _StudentPageState extends State<StudentPage> {
   }
 
   // ── Resolve image URL per platform
+  // String getImageUrl(String path) {
+  //   if (kIsWeb) return "http://localhost:5000$path";
+  //   return "http://172.16.0.105:5000$path"; // adb reverse
+  // }
   String getImageUrl(String path) {
-    if (kIsWeb) return "http://localhost:5000$path";
-    return "http://10.0.2.2:5000$path"; // adb reverse
-  }
+  return "https://testing-microlab.onrender.com$path";
+}
 
   Future<void> fetchStudents() async {
     setState(() => isLoading = true);
@@ -756,6 +760,23 @@ class _StudentPageState extends State<StudentPage> {
                       onTap: () => showLocationSheet(student),
                     ),
                     const SizedBox(width: 8),
+
+                      // LIVE TRACKING
+                    _actionBtn(
+                      icon: Icons.share_location_rounded,
+                      color: const Color(0xFF2E9E6E),
+                      enabled: true,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => TrackingEntryScreen(
+                              prefilledName: student['name'],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
 
                     // Edit
                     _actionBtn(

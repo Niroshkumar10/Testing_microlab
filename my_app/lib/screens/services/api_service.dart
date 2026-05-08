@@ -15,14 +15,16 @@ class ApiService {
   //   }
   // }
 
-  static String get baseUrl {
-  if (kIsWeb) {
-    return "http://localhost:5000/api";
-  } else {
-    return "http://localhost:5000/api"; // ✅ same for mobile via adb reverse
-  }
+//   static String get baseUrl {
+//   if (kIsWeb) {
+//     return "http://localhost:5000/api";
+//   } else {
+//     return "http://localhost:5000/api"; // ✅ same for mobile via adb reverse
+//   }
+// }
+static String get baseUrl {
+  return "https://testing-microlab.onrender.com/api";
 }
-
   static String get authUrl    => "$baseUrl/auth";
   static String get studentUrl => "$baseUrl/students";
 
